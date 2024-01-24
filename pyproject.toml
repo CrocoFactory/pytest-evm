@@ -1,0 +1,45 @@
+[tool.poetry]
+name = 'pytest_evm'
+version = '0.1.0'
+description = 'The testing package containing tools to test Web3-based projects'
+authors = ['Alexey <abelenkov2006@gmail.com>']
+license = 'MIT'
+readme = 'README.md'
+repository = 'https://github.com/blnkoff/pytest-evm'
+homepage = 'https://github.com/blnkoff/pytest-evm'
+classifiers = [
+    'Development Status :: 4 - Beta',
+    'Intended Audience :: Developers',
+    'Topic :: Software Development :: Libraries :: Python Module',
+    'Topic :: Software Development :: Testing',
+    'Framework :: Pytest',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3 :: Only',
+    'License :: OSI Approved :: MIT License',
+    'Operating System :: Microsoft :: Windows',
+    'Operating System :: MacOS'
+]
+packages = [{ include = 'pytest_evm' }]
+
+[tool.poetry.dependencies]
+python = '^3.11'
+web3 = "^6.12.0"
+pytest = "^7.4.3"
+pytest-asyncio = "^0.23.2"
+evm-wallet = "^1.1.1"
+python-dotenv = {version = "^1.0.1", optional = true}
+
+[tool.poetry.extras]
+dotenv = ["python-dotenv"]
+
+[build-system]
+requires = ['poetry-core']
+build-backend = 'poetry.core.masonry.api'
+
+[tool.poetry.plugins."pytest11"]
+evm_fixtures = 'pytest_evm.fixtures'
+evm_hooks = 'pytest_evm.hooks'
+
+[project.entry-points."timmins.display"]
+evm_fixtures = 'pytest_evm.fixtures'
+evm_hooks = 'pytest_evm.hooks'
