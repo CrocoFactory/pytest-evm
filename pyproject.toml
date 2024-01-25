@@ -10,7 +10,7 @@ homepage = 'https://github.com/blnkoff/pytest-evm'
 classifiers = [
     'Development Status :: 4 - Beta',
     'Intended Audience :: Developers',
-    'Topic :: Software Development :: Libraries :: Python Module',
+    'Topic :: Software Development :: Libraries :: Python Modules',
     'Topic :: Software Development :: Testing',
     'Framework :: Pytest',
     'Programming Language :: Python :: 3.11',
@@ -31,6 +31,10 @@ python-dotenv = {version = "^1.0.1", optional = true}
 
 [tool.poetry.extras]
 dotenv = ["python-dotenv"]
+
+[tool.poetry.group.dev.dependencies]
+build = "^1.0.3"
+twine = "^4.0.2"
 
 [build-system]
 requires = ['poetry-core']
