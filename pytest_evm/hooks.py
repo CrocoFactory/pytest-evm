@@ -33,16 +33,17 @@ def pytest_runtest_makereport(item: pytest.Item, call):
                     wallet = item.funcargs['wallet']
                     wallet = Wallet(wallet.private_key, wallet.network)
                     tx = get_last_transaction(wallet)
-                    last_tx_hash = tx['hash'].hex()
+                    last_tx_hash = tx['hash']
                     balance = get_balance(wallet)
                     costs = tx['value'] + tx['gas']*tx['gasPrice']
                     costs = Web3.from_wei(costs, 'ether')
                     print()
-                    print(f'From: https://goerli.etherscan.io/address/{wallet.public_key}')
+                    print(f'From: {wallet.public_key}')
                     print(f'Transaction: {wallet.get_explorer_url(last_tx_hash)}')
                     print(f'Costs: {costs} {wallet.network["token"]}')
                     print(f'Balance: {balance} {wallet.network["token"]}')
                     print(f'Network: {wallet.network["network"]}')
+                except TimeoutError as ex:
+                    print(ex)
                 except Exception as ex:
-                    print("There was an error while getting information about transaction")
-
+                    print(f"There was an error while getting information about transaction: {ex}")

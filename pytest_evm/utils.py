@@ -1,5 +1,7 @@
+import time
 from functools import wraps
 from evm_wallet import Wallet
+from hexbytes import HexBytes
 from web3 import Web3
 from web3.middleware import geth_poa_middleware
 
@@ -9,13 +11,13 @@ def validate_status(func):
     async def wrapper(*args, **kwargs):
         wallet = kwargs['wallet']
         tx_hash = await func(*args, **kwargs)
-        status = bool(await wallet.provider.eth.wait_for_transaction_receipt(tx_hash))
+        status = (await wallet.provider.eth.wait_for_transaction_receipt(tx_hash)).get('status')
         assert status
 
     return wrapper
 
 
-def get_last_transaction(wallet: Wallet):
+def get_last_transaction(wallet: Wallet, timeout: float = 10):
     w3 = Web3(Web3.HTTPProvider(wallet.network['rpc']))
     w3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
@@ -26,13 +28,25 @@ def get_last_transaction(wallet: Wallet):
     last_transaction = None
     wallet_address = wallet.public_key
 
+    current_time = time.time()
+    deadline = current_time + timeout
     for block in range(end_block, start_block - 1, -1):
         block_info = w3.eth.get_block(block, True)
 
         for tx in reversed(block_info['transactions']):
-            if wallet_address.lower() in [tx['from'].lower(), tx['to'].lower()]:
-                last_transaction = tx
-                break
+            if time.time() > deadline:
+                raise TimeoutError(f'Timeout was exceeded for getting last transaction')
+            try:
+                from_address = tx['from'].lower()
+
+                if isinstance(from_address, HexBytes):
+                    from_address = from_address.hex()
+
+                if wallet_address.lower() == from_address.lower():
+                    last_transaction = tx
+                    break
+            except (AttributeError, KeyError):
+                continue
 
         if last_transaction:
             break
