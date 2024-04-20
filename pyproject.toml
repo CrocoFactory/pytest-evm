@@ -1,6 +1,6 @@
 [tool.poetry]
 name = 'pytest_evm'
-version = '0.1.1'
+version = '0.1.2'
 description = 'The testing package containing tools to test Web3-based projects'
 authors = ['Alexey <abelenkov2006@gmail.com>']
 license = 'MIT'

@@ -4,15 +4,18 @@ from evm_wallet import Wallet
 from hexbytes import HexBytes
 from web3 import Web3
 from web3.middleware import geth_poa_middleware
+from pytest_evm.exceptions import TransactionStatusError
 
 
 def validate_status(func):
     @wraps(func)
     async def wrapper(*args, **kwargs):
-        wallet = kwargs['wallet']
+        wallet: Wallet = kwargs['wallet']
         tx_hash = await func(*args, **kwargs)
         status = (await wallet.provider.eth.wait_for_transaction_receipt(tx_hash)).get('status')
-        assert status
+        if not status:
+            explorer_url = wallet.get_explorer_url(tx_hash)
+            raise TransactionStatusError(explorer_url)
 
     return wrapper
 

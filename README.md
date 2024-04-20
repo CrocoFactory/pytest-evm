@@ -105,8 +105,9 @@ def eth_amount():
 ```
 
 ## Test Reporting
-If your test performs one transaction, you can automatically `assert` transaction status and get useful report after test,
-if it completed successfully. To do this, you need to add mark `pytest.mark.tx` to your test.
+If your want to test one transaction, you can automatically `assert` transaction status and get useful report after test,
+if it completed successfully. To do this, you need to add mark `pytest.mark.tx` to your test and you must **return 
+transaction hash in test**
 
 ```python
 import pytest
@@ -128,6 +129,7 @@ Here is example of testing with `pytest-evm`:
 
 ```python
 import pytest
+from bridge import Bridge
 
 class TestBridge:
     @pytest.mark.tx
