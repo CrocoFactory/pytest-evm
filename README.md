@@ -122,7 +122,7 @@ async def test_transaction(wallet, eth_amount):
 
 After test, you get similar report:
 
-![Test Report](https://i.ibb.co/n8vKXwB/Screenshot-2024-01-24-at-22-08-29.png)
+![Test Report](https://i.ibb.co/h98dNPL/Screenshot-2024-04-22-at-22-41-19.png)
          
 ## Usage Example
 Here is example of testing with `pytest-evm`:

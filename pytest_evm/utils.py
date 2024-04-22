@@ -55,10 +55,3 @@ def get_last_transaction(wallet: Wallet, timeout: float = 10):
             break
 
     return last_transaction
-
-
-def get_balance(wallet: Wallet) -> int:
-    w3 = Web3(Web3.HTTPProvider(wallet.network['rpc']))
-    balance = w3.eth.get_balance(account=wallet.public_key)
-    balance = w3.from_wei(balance, 'ether')
-    return balance

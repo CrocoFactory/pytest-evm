@@ -3,7 +3,7 @@ from web3 import Web3
 from functools import wraps
 from typing import Iterable
 from evm_wallet import Wallet
-from pytest_evm.utils import validate_status, get_last_transaction, get_balance
+from pytest_evm.utils import validate_status, get_last_transaction
 
 
 def pytest_configure(config):
@@ -34,7 +34,7 @@ def pytest_runtest_makereport(item: pytest.Item, call):
                     wallet = Wallet(wallet.private_key, wallet.network)
                     tx = get_last_transaction(wallet)
                     last_tx_hash = tx['hash']
-                    balance = get_balance(wallet)
+                    balance = wallet.get_balance(True)
                     costs = tx['value'] + tx['gas']*tx['gasPrice']
                     costs = Web3.from_wei(costs, 'ether')
                     print()
