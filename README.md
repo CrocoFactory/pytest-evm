@@ -1,13 +1,20 @@
 # pytest-evm
 
-[![Croco Logo](https://i.ibb.co/G5Pjt6M/logo.png)](https://t.me/crocofactory)
+<a href="https://github.com/CrocoFactory"><img alt="Croco Logo" src="https://raw.githubusercontent.com/CrocoFactory/.github/main/branding/logo/bookmark_rounded.png" width="100"></a>
+            
+[![PyPi Version](https://img.shields.io/pypi/v/pytest-evm)](https://pypi.org/project/pytest-evm/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/pytest-evm?label=downloads)](https://pypi.org/project/pytest-evm/)
+[![License](https://img.shields.io/github/license/CrocoFactory/pytest-evm.svg)](https://pypi.org/project/pytest-evm/)
+[![Last Commit](https://img.shields.io/github/last-commit/CrocoFactory/pytest-evm.svg)](https://pypi.org/project/pytest-evm/)
+[![Development Status](https://img.shields.io/pypi/status/pytest-evm)](https://pypi.org/project/pytest-evm/)
 
 The testing package containing tools to test Web3-based projects
 
-- **[Telegram channel](https://t.me/crocofactory)**
-- **[Bug reports](https://github.com/blnkoff/pytest-evm/issues)**
+- **[Bug reports](https://github.com/CrocoFactory/pytest-evm/issues)**
 
 Package's source code is made available under the [MIT License](LICENSE)
+
+The project is made by the **[Croco Factory](https://github.com/CrocoFactory)** team
 
 # Quick Start
 There are few features simplifying your testing with pytest:
@@ -24,7 +31,7 @@ This fixture simplify creating wallet instances as fixtures. Wallet instances ar
 import os
 import pytest
 from typing import Optional
-from evm_wallet.types import NetworkOrInfo
+from evm_wallet.types import NetworkInfo
 from evm_wallet import AsyncWallet, Wallet
 
 @pytest.fixture(scope="session")
@@ -159,7 +166,7 @@ class TestBridge:
 To install the package from GitHub you can use:
 
 ```shell
-pip install git+https://github.com/blnkoff/pytest-evm.git
+pip install git+https://github.com/CrocoFactory/pytest-evm.git
 ```
 
 To install the package from PyPi you can use:

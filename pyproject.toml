@@ -1,12 +1,12 @@
 [tool.poetry]
 name = 'pytest_evm'
-version = '0.2.0'
+version = '0.2.0.post1'
 description = 'The testing package containing tools to test Web3-based projects'
 authors = ['Alexey <axbelenkov@gmail.com>']
 license = 'MIT'
 readme = 'README.md'
-repository = 'https://github.com/blnkoff/pytest-evm'
-homepage = 'https://github.com/blnkoff/pytest-evm'
+repository = 'https://github.com/CrocoFactory/pytest-evm'
+homepage = 'https://github.com/CrocoFactory/pytest-evm'
 classifiers = [
     'Development Status :: 4 - Beta',
     'Intended Audience :: Developers',
